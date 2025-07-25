@@ -1,0 +1,67 @@
+@basicAuth = {{$dotenv RABBITMQ_USERNAME}}:{{$dotenv RABBITMQ_PASSWORD}}
+@hostname = localhost
+@port = {{$dotenv RABBITMQ_UI_PORT}}
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+### Get user
+
+GET http://{{host}}/api/users HTTP/1.1
+Authorization: Basic {{basicAuth}}
+
+### Get vhost
+
+GET http://{{host}}/api/vhosts HTTP/1.1
+Authorization: Basic {{basicAuth}}
+
+### Get exchanges
+
+GET http://{{host}}/api/exchanges HTTP/1.1
+Authorization: Basic {{basicAuth}}
+
+### Get exchanges (/myapp.vhost/myapp.exchange)
+
+GET http://{{host}}/api/exchanges/myapp.vhost/myapp.topic.exchange HTTP/1.1
+Authorization: Basic {{basicAuth}}
+
+### Get queues
+
+GET http://{{host}}/api/queues HTTP/1.1
+Authorization: Basic {{basicAuth}}
+
+### Get queues (myapp.vhost)
+
+GET http://{{host}}/api/queues/myapp.vhost HTTP/1.1
+Authorization: Basic {{basicAuth}}
+
+### Get queues (myapp.vhost/myapp.queue_foo)
+
+GET http://{{host}}/api/queues/myapp.vhost/myapp.queue_foo HTTP/1.1
+Authorization: Basic {{basicAuth}}
+
+### Add message to queue
+
+POST http://{{host}}/api/exchanges/myapp.vhost/myapp.topic.exchange/publish HTTP/1.1
+Authorization: Basic {{basicAuth}}
+Content-Type: {{contentType}}
+
+{
+    "properties": {},
+    "routing_key": "myapp.queue-foo",
+    "payload": "This is the sample payload",
+    "payload_encoding": "string"
+}
+
+
+### Add message to queue
+
+POST http://{{host}}/api/exchanges/myapp.vhost/myapp.topic.exchange/publish HTTP/1.1
+Authorization: Basic {{basicAuth}}
+Content-Type: {{contentType}}
+
+{
+    "properties": {},
+    "routing_key": "myapp.queue-bar",
+    "payload": "This is the sample payload",
+    "payload_encoding": "string"
+}

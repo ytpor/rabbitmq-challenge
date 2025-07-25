@@ -1,0 +1,22 @@
+services:
+  rabbitmq:
+    image : rabbitmq:4.1.1-management-alpine
+    container_name: rabbitmq
+    hostname: rabbitmq # Set this so that RabbitMQ loads this hostname every time
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+    ports:
+      - '${RABBITMQ_PORT:-5672}:5672' # AMQP
+      - '${RABBITMQ_UI_PORT:-15672}:15672' # Management UI
+    restart: unless-stopped
+    volumes:
+      - ./logs:/var/log/rabbitmq
+      - data:/var/lib/rabbitmq
+volumes:
+  data:
+    driver: local
+networks:
+  default:
+    name: nginx-proxy
+    external: true
