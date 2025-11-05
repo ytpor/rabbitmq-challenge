@@ -26,9 +26,15 @@ You can access the RabbitMQ Management HTTP API through the following URL:
 
     http://127.0.0.1:15672/api/index.html
 
+## Using the Admin API
+
+Refer to [sample.sh](sample.sh) on how to create exchange and queue.
+
+Refer to [route.http](route.http) on how to interact wit the Admin API.
+
 ## Usage
 
-From within the `nginx-proxy` network, other containers can access RabbitMQ by its container name `rabbitmq`.
+From within the `nginx-proxy` network, other containers can access RabbitMQ by its container name `rabbitmq.local`.
 
 ## Access control
 
@@ -38,7 +44,7 @@ Only users with the `administrator` tag can access the management plugin (UI, HT
 
 You can follow the latest RabbitMQ log using the command below:
 
-    docker logs --tail 10 -f rabbitmq
+    docker logs --tail 10 -f rabbitmq.local
 
 ## Example
 

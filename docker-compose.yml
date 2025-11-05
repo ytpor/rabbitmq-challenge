@@ -1,7 +1,7 @@
 services:
   rabbitmq:
     image : rabbitmq:4.1.1-management-alpine
-    container_name: rabbitmq
+    container_name: rabbitmq.local
     hostname: rabbitmq # Set this so that RabbitMQ loads this hostname every time
     environment:
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_USERNAME}
